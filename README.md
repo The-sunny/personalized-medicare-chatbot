@@ -1,6 +1,5 @@
-# PersonalizedMedicareChatbotwithLLMandRAG
+# A Personalized Medicare Chatbot with LLM and RAG
 
-A minimal, working reference implementation of your resume project:
 - **Python, Pinecone, OpenAI, LLMs**
 - Process & embed **MedQuAD** records (sample included), store vectors in **Pinecone**
 - Hybrid search (BM25 + vector). **Re-rank to top-3** with BM25.
@@ -70,7 +69,7 @@ python -m src.active_learning.uncertainty_sampling --input data/processed/medqua
 - **Active learning**: Simulated confidence; low-confidence answers are flagged to `flags.jsonl`.
 - Replace sample with full **MedQuAD** by placing a JSONL file in `data/raw/` and pointing `--input` at it.
 
-## Project Tree (abridged)
+## Project Tree
 
 ```
 src/
@@ -83,10 +82,3 @@ src/
 data/sample/medquad_sample.jsonl
 models/bm25.pkl          # created after step 7
 ```
-
-## Claims Matching Your Resume
-
-- **20k+ records**: Swap sample with full MedQuAD and run steps 4–7 on the full file.
-- **Active learning (+15% relevance)**: `src/active_learning/uncertainty_sampling.py` flags low-confidence; you can iterate labeling.
-- **BERT embeddings in Pinecone**: `src/data/embed_and_upsert.py` encodes with BERT and upserts to Pinecone.
-- **BM25 re-ranking to top-3 (+20% accuracy)**: `src/app/chat.py` gathers top-k by vectors, then re-ranks with BM25 and keeps top 3.
